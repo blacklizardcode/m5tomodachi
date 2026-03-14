@@ -15,13 +15,13 @@ M5Tomodachi pet;
 int init_pet() {
     M5Tomodachi filePet = read_parse_character_file();
 
-    pet.hunger = (filePet.hunger == NULL) ? 0 : filePet.hunger;
-    pet.happiness = (filePet.happiness == NULL) ? 0 : filePet.happiness;
-    pet.energy = (filePet.energy == NULL) ? 0 : filePet.energy;
-    pet.health = (filePet.health == NULL) ? 0 : filePet.health;
-    pet.age = (filePet.age == NULL) ? 0 : filePet.age;
-    pet.stage = (filePet.stage == NULL) ? STAGE_EGG : filePet.stage;
-    pet.care_mistakes = (filePet.care_mistakes == NULL) ? 0 : filePet.care_mistakes;
+    pet.hunger = (filePet.hunger == 0) ? 0 : filePet.hunger;
+    pet.happiness = (filePet.happiness == 0) ? 0 : filePet.happiness;
+    pet.energy = (filePet.energy == 0) ? 0 : filePet.energy;
+    pet.health = (filePet.health == 0) ? 0 : filePet.health;
+    pet.age = (filePet.age == 0) ? 0 : filePet.age;
+    pet.stage = (filePet.stage == 0) ? STAGE_EGG : filePet.stage;
+    pet.care_mistakes = (filePet.care_mistakes == 0) ? 0 : filePet.care_mistakes;
     ESP_LOGI(TAG, "Tomodachi initialized");
     return 0;
 }

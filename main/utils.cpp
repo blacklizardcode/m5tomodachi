@@ -11,7 +11,7 @@ void xor_cipher(char *data, const char *key);
 
 
 M5Tomodachi read_parse_character_file() {
-    M5Tomodachi character = {0};
+    M5Tomodachi character = {};
     FILE *fptr = fopen("/filesystem/character.txt", "r");
     if (!fptr) {
         return character;
@@ -60,7 +60,7 @@ void write_parse_character_file(const M5Tomodachi& character) {
         "happiness=%u\n"
         "energy=%u\n"
         "health=%u\n"
-        "age=%u\n"
+        "age=%llu\n"
         "stage=%u\n"
         "care_mistakes=%u\n",
         character.hunger,

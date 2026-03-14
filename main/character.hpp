@@ -13,7 +13,7 @@ typedef struct M5Tomodachi {
     uint8_t happiness;
     uint8_t energy;
     uint8_t health;
-    uint8_t age;
+    uint64_t age;
     uint8_t stage;
     uint8_t care_mistakes;
 } M5Tomodachi;
