@@ -4,6 +4,12 @@
 #include "M5Unified.hpp"
 #include "esp_littlefs.h"
 #include "esp_log.h"
+#include "freertos/task.h"
+
+// local imports
+#include "character.hpp"
+#include "ui.hpp"
+
 void onStart();
 
 extern "C" void app_main(void)
