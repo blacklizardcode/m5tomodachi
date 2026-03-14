@@ -1,4 +1,4 @@
-# m5tomodachi
-> Turn your m5 stick or cardputer into your friend
+# M5トモダチ
+> M5 Tomodachi
 
 ##
