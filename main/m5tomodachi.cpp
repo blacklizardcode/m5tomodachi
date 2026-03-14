@@ -11,6 +11,7 @@
 #include "ui.hpp"
 
 void onStart();
+void tick_pet_task(void *pvParameters);
 
 extern "C" void app_main(void)
 {   
@@ -38,10 +39,15 @@ void onStart() {
 
     // init the pet
     init_pet();
+
+    xTaskCreate(tick_pet_task, "pet_tick", 4096, NULL, 5, NULL);
 }
 
 // tick the pet every 1 minute (1000ms * 60)
 void tick_pet_task(void *pvParameters) {
-    tick_pet();
-    vTaskDelay(pdMS_TO_TICKS(1000 * 60));
+    while (1) {
+        tick_pet();
+        vTaskDelay(pdMS_TO_TICKS(1000 * 60));
+    }
+    
 }
