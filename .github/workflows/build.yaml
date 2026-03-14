@@ -1,0 +1,35 @@
+name: Build Firmware
+
+on:
+  push:
+    paths:
+      - "main/**"
+  pull_request:
+    paths:
+      - "main/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: ESP-IDF build
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.5.3
+          target: esp32
+          path: .
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-firmware
+          path: |
+            build/*.bin
+            build/*.elf
+            build/bootloader/*.bin
+            build/partition_table/*.bin

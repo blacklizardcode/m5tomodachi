@@ -1,0 +1,6 @@
+# vscode
+.vscode/
+
+# esp-idf
+build/
+managed_components
