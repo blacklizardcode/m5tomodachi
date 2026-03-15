@@ -68,9 +68,9 @@ esp_err_t init_pet() {
 int tick_pet() {
     pet.age += 1;
 
-    pet.hunger -= 2;
-    pet.happiness -= 1;
-    pet.energy -= 1;
+    pet.hunger = (pet.hunger >= 2) ? pet.hunger - 2 : 0;
+    pet.happiness = (pet.happiness >= 1) ? pet.happiness - 1 : 0;
+    pet.energy = (pet.energy >= 1) ? pet.energy - 1 : 0;
 
     pet.stage = stage_from_age(pet.age);
 
