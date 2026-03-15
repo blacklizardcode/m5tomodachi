@@ -1,4 +1,4 @@
 idf_component_register(
-    SRCS "m5tomodachi.cpp" "character/character.cpp" "ui/ui.cpp" "utils/utils.cpp" "settings/settings.cpp" "tasks/tomodachi_tasks.cpp" "utils/utils_webserver.cpp"
+    SRCS "m5tomodachi.cpp" "character/character.cpp" "ui/ui.cpp" "utils/utils.cpp" "settings/settings.cpp" "tasks/tomodachi_tasks.cpp" "utils/utils_webserver.cpp" "ui/spritesheet/spritesheet.cpp"
     INCLUDE_DIRS "."
 )

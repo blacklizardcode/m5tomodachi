@@ -17,7 +17,7 @@
 #include "utils/utils_webserver.hpp"
 #include "tasks/tomodachi_tasks.hpp"
 #include "settings/settings.hpp"
-
+#include "ui/spritesheet/spritesheet.hpp"
 
 
 esp_err_t onStart();
@@ -87,7 +87,7 @@ esp_err_t onStart() {
     if (err != ESP_OK) {
         return err;
     }
-    
+
     // TODO: Turn into a ui option 
     settings_start_webserver();
 
