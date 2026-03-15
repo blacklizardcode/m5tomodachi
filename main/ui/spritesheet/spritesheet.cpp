@@ -1,10 +1,13 @@
+#include <byteswap.h>
+
 // esp-idf imports
 #include "esp_attr.h"
+#include "M5Unified.hpp"
 
 // local imports
 #include "ui/spritesheet/spritesheet.hpp"
 
-const unsigned char epd_bitmap_ [] __attribute__((section(".rodata"))) = {
+const unsigned char spritesheet [] __attribute__((section(".rodata"))) = {
 	// 'pixil-frame-0, 121x52px
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 	0x7f, 0xff, 0xff, 0xfd, 0xff, 0xff, 0xff, 0xf7, 0xff, 0xff, 0xff, 0xdf, 0xff, 0xff, 0xff, 0x00, 
@@ -59,3 +62,32 @@ const unsigned char epd_bitmap_ [] __attribute__((section(".rodata"))) = {
 	0x7f, 0xff, 0xff, 0xfd, 0xff, 0xff, 0xff, 0xf7, 0xff, 0xff, 0xff, 0xdf, 0xff, 0xff, 0xff, 0x00, 
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
+
+
+const int SPRITE_WIDTH = 31;
+const int SPRITE_HEIGHT = 16;
+const int SHEET_WIDTH = 121;
+const int SHEET_HEIGHT = 52;
+const int SPRITE_X_OFFSET = 2;  // starting x of first sprite
+const int SPRITE_Y_OFFSET = 2;  // starting y of first sprite
+
+
+void drawSprite(M5Canvas &canvas, int spriteIndexX, int spriteIndexY, int xDest, int yDest) {
+    int spriteX0 = SPRITE_X_OFFSET + spriteIndexX * SPRITE_WIDTH;
+    int spriteY0 = SPRITE_Y_OFFSET + spriteIndexY * SPRITE_HEIGHT;
+
+	for (int y = 0; y < SPRITE_HEIGHT; y++) {
+		for (int x = 0; x < SPRITE_WIDTH; x++) {
+			int sheetX = spriteX0 + x;
+			int sheetY = spriteY0 + y;
+
+			int byteIndex = (sheetY * ((SHEET_WIDTH + 7) / 8)) + (sheetX / 8);
+			uint8_t b = pgm_read_byte(spritesheet[byteIndex]);
+			bool pixelOn = b & (0x80 >> (sheetX % 8));
+
+			if (pixelOn) {
+				canvas.drawPixel(xDest + x, yDest + y, TFT_WHITE);
+			}
+		}
+	}
+}
