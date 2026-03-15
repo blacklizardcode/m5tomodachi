@@ -11,7 +11,7 @@ void xor_cipher(char *data, const char *key);
 
 
 M5Tomodachi read_parse_character_file() {
-    M5Tomodachi character = {};
+    M5Tomodachi character = { 0 };
     FILE *fptr = fopen("/filesystem/character.txt", "r");
     if (!fptr) {
         return character;
