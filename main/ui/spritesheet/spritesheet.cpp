@@ -1,5 +1,3 @@
-#include <byteswap.h>
-
 // esp-idf imports
 #include "esp_attr.h"
 #include "M5Unified.hpp"
@@ -63,18 +61,28 @@ const unsigned char spritesheet [] __attribute__((section(".rodata"))) = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
+const vector2 NEUTRAL_HAPPY = {1, 1};
+const vector2 NEUTRAL_HAPPY_BLINK = {1, 18};
+const vector2 NEUTRAL_HAPPY_WINK = {1, 35};
+const vector2 ANGRY = {31, 1};
+const vector2 HAPPY = {31, 18};
+const vector2 SUPRISED = {31, 35};
+const vector2 SAD_EYES_CLOSED = {61, 1};
+const vector2 SAD = {61, 18};
+const vector2 UWU = {61, 35};
+const vector2 DEAD = {91, 1};
 
-const int SPRITE_WIDTH = 31;
+
+
+const int SPRITE_WIDTH = 29;
 const int SPRITE_HEIGHT = 16;
 const int SHEET_WIDTH = 121;
 const int SHEET_HEIGHT = 52;
-const int SPRITE_X_OFFSET = 2;  // starting x of first sprite
-const int SPRITE_Y_OFFSET = 2;  // starting y of first sprite
 
 
-void drawSprite(M5Canvas &canvas, int spriteIndexX, int spriteIndexY, int xDest, int yDest) {
-    int spriteX0 = SPRITE_X_OFFSET + spriteIndexX * SPRITE_WIDTH;
-    int spriteY0 = SPRITE_Y_OFFSET + spriteIndexY * SPRITE_HEIGHT;
+void drawSprite(M5Canvas &canvas, vector2 sprite) {
+    int spriteX0 = sprite.x;
+    int spriteY0 = sprite.y;
 
 	for (int y = 0; y < SPRITE_HEIGHT; y++) {
 		for (int x = 0; x < SPRITE_WIDTH; x++) {
@@ -82,11 +90,11 @@ void drawSprite(M5Canvas &canvas, int spriteIndexX, int spriteIndexY, int xDest,
 			int sheetY = spriteY0 + y;
 
 			int byteIndex = (sheetY * ((SHEET_WIDTH + 7) / 8)) + (sheetX / 8);
-			uint8_t b = pgm_read_byte(spritesheet[byteIndex]);
+			uint8_t b = spritesheet[byteIndex];
 			bool pixelOn = b & (0x80 >> (sheetX % 8));
 
 			if (pixelOn) {
-				canvas.drawPixel(xDest + x, yDest + y, TFT_WHITE);
+				canvas.drawPixel(x, y, TFT_WHITE);
 			}
 		}
 	}

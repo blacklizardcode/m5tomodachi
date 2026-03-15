@@ -16,6 +16,11 @@ typedef struct map {
     char value[MAX_MAP_VALUE];
 } map;
 
+typedef struct vector2 {
+    int x;
+    int y;
+} vector2;
+
 void write_parse_character_file(const M5Tomodachi& character);
 M5Tomodachi read_parse_character_file();
 
