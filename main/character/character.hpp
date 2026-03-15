@@ -2,6 +2,8 @@
 
 #define CHARACTER_HPP
 
+#include "stdint.h"
+
 #define STAGE_EGG 0
 #define STAGE_BABY 1
 #define STAGE_CHILD 2
